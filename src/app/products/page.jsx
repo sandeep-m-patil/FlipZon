@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -19,6 +18,7 @@ import {
 } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { Heart, ShoppingCart, Search as SearchIcon } from "lucide-react"
+import { AddToCartButton } from "@/components/AddToCartButton"
 
 const products = [
   {
@@ -215,14 +215,7 @@ export default function ProductsPage() {
               </div>
             </CardContent>
             <CardFooter className="">
-              <Button
-                className="w-full transition-colors"
-                disabled={!product.inStock}
-                variant={product.inStock ? "default" : "secondary"}
-              >
-                <ShoppingCart className="mr-2 h-4 w-4" />
-                {product.inStock ? "Add to Cart" : "Out of Stock"}
-              </Button>
+            <AddToCartButton product={product} />
             </CardFooter>
           </Card>
         ))}
