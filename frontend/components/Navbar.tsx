@@ -13,17 +13,15 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
+import { useAuth } from '@/context/AuthContext';
 
-import { useAuth } from '@/store/useAuth';
-import { useCart } from '@/store/useCart';
 
 const Navbar: React.FC = () => {
-  const { user, setUser } = useAuth();
-  const { items } = useCart();
-  const router = useRouter();
+
+  const {user,logout,isAuthenticated} = useAuth();
+    const router = useRouter();
 
   const handleLogout = () => {
-    setUser(null);
     router.push('/login');
   };
 
@@ -54,7 +52,7 @@ const Navbar: React.FC = () => {
                     variant="destructive"
                     className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs"
                   >
-                    {items.length}
+                    3
                   </Badge>
                 </Button>
               </Link>

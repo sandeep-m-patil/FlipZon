@@ -1,11 +1,17 @@
 export interface User {
   id: string;
-  email: string;
   name: string;
-  role: 'user' | 'admin';
-  avatar?: string;
-  createdAt: string;
-  updatedAt: string;
+  email: string;
+  role: 'admin' | 'user';
+}
+
+export interface AuthContextType {
+  user: User | null;
+  isAuthenticated: boolean;
+  login: (email: string, password: string) => Promise<void>;
+  signup: (name: string, email: string, password: string) => Promise<void>;
+  logout: () => void;
+  loading: boolean;
 }
 
 export interface Product {
