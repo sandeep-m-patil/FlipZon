@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProductShowcase from '@/components/PorductShowCase';
+import AboutPage from '@/components/About';
 
 const Home: React.FC = () => {
   return (
@@ -47,6 +48,7 @@ const Home: React.FC = () => {
       </main>
 
       <ProductShowcase />
+      <AboutPage/>
 
       <Footer />
     </div>
