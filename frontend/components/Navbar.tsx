@@ -28,21 +28,21 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="bg-white shadow-sm border-b">
+    <header className="fixed top-0 left-0 w-full z-50  bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <Package className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold text-gray-900">FlipZon</span>
+              <Package className="h-8 w-8 text-[#0066DA]" />
+              <span className="text-xl font-bold text-[#0066DA]">FlipZon</span>
             </Link>
           </div>
 
           <nav className="hidden md:flex space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-primary transition-colors">Home</Link>
-            <Link href="/products" className="text-gray-700 hover:text-primary transition-colors">Products</Link>
-            <Link href="/about" className="text-gray-700 hover:text-primary transition-colors">About</Link>
-            <Link href="/contact" className="text-gray-700 hover:text-primary transition-colors">Contact</Link>
+            <Link href="/" className="text-gray-700 hover:text-[#0066DA] transition-colors">Home</Link>
+            <Link href="/products" className="text-gray-700 hover:text-[#0066DA] transition-colors">Products</Link>
+            <Link href="/about" className="text-gray-700 hover:text-[#0066DA] transition-colors">About</Link>
+            <Link href="/contact" className="text-gray-700 hover:text-[#0066DA] transition-colors">Contact</Link>
           </nav>
 
           <div className="flex items-center space-x-4">
@@ -98,10 +98,10 @@ const Navbar: React.FC = () => {
               </>
             ) : (
               <div className="flex items-center space-x-2">
-                <Button variant="ghost" asChild>
+                <Button variant="outline" asChild>
                   <Link href="/login">Login</Link>
                 </Button>
-                <Button asChild>
+                <Button asChild className='bg-[#0066DA] hover:bg-[#2684FC]'>
                   <Link href="/signup">Sign Up</Link>
                 </Button>
               </div>
