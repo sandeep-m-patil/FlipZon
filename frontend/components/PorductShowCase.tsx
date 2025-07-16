@@ -9,33 +9,35 @@ const products = [
         title: 'Macbook Air',
         description:
             '15-inch Retina display for more of what you love in a slim design.',
-        image: '/mackbook.png',
-        bg: 'bg-gray-100',
+        image: 'https://assets.stickpng.com/thumbs/5ec26e0b6c295800046c81db.png',
+        bg: 'bg-white',
         text: 'text-black',
     },
     {
-        title: 'Playstation 5',
+        title: 'PS4 Controller',
         description:
-            'Powerful CPU, GPU, and SSD redefine your gaming experience.',
-        image: '/ps5.png',
+            'Powerful Controller that redefine your gaming experience.',
+        image: 'https://assets.stickpng.com/thumbs/58f36427a4fa116215a923cf.png',
+        bg: 'bg-white',
+        text: 'text-black',
+    },
+    {
+        title: 'Sony Headphones',
+        description: 'Immersive audio experience with powerful computation.',
+        image: 'https://assets.stickpng.com/thumbs/580b57fbd9996e24bc43bfbe.png',
+        bg: 'bg-white',
+        text: 'text-black',
+    },
+    {
+        title: 'Apple Iphone 12',
+        description: '15-inch Retina display (128GB Storage, Purple)',
+        image: 'https://assets.stickpng.com/thumbs/61d2f93392b57c0004c64747.png',
         bg: 'bg-white',
         text: 'text-black',
     },
 
-    {
-        title: 'Apple AirPods Max',
-        description: 'Immersive audio experience with powerful computation.',
-        image: '/airpod.png',
-        bg: 'bg-white',
-        text: 'text-black',
-    },
-    {
-        title: 'Apple Vision Pro',
-        description: 'An immersive way to experience entertainment.',
-        image: '/applevision.png',
-        bg: 'bg-black',
-        text: 'text-white',
-    },
+    
+    
 ];
 
 export default function ProductShowcase() {
@@ -45,7 +47,7 @@ export default function ProductShowcase() {
                 {products.map((product, idx) => (
                     <div
                         key={idx}
-                        className={`rounded-xl overflow-hidden shadow-md transition-transform hover:scale-[1.01] ${product.bg} ${product.text} flex flex-col`}
+                        className={`rounded-xl overflow-hidden hover:bg-black hover:text-white shadow-md transition-transform hover:scale-[1.01] ${product.bg} ${product.text} flex flex-col`}
                     >
                         <div className="p-6 flex flex-col justify-center flex-1">
                             <h2 className="text-2xl font-semibold mb-2">{product.title}</h2>

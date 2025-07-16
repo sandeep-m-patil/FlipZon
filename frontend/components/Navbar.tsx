@@ -41,8 +41,8 @@ const Navbar: React.FC = () => {
           <nav className="hidden md:flex space-x-8">
             <Link href="/" className="text-gray-700 hover:text-[#0066DA] transition-colors">Home</Link>
             <Link href="/products" className="text-gray-700 hover:text-[#0066DA] transition-colors">Products</Link>
-            <Link href="/about" className="text-gray-700 hover:text-[#0066DA] transition-colors">About</Link>
-            <Link href="/contact" className="text-gray-700 hover:text-[#0066DA] transition-colors">Contact</Link>
+            <Link href="/#about" className="text-gray-700 hover:text-[#0066DA] transition-colors">About</Link>
+            <Link href="/#contact" className="text-gray-700 hover:text-[#0066DA] transition-colors">Contact</Link>
           </nav>
 
           <div className="flex items-center space-x-4">
