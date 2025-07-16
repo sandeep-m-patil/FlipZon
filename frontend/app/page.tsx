@@ -36,7 +36,7 @@ const Home: React.FC = () => {
 
               <Button
                 size="lg"
-                variant="outline"
+                variant="ghost"
                 className="text-lg px-8 py-3 bg-white text-[#0066DA] hover:bg-[#0066DA] hover:text-white transition-colors shadow-md"
               >
                 Shop Now
