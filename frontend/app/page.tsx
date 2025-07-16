@@ -2,23 +2,19 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import ProductShowcase from '@/components/PorductShowCase';
 import AboutPage from '@/components/About';
 
 const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
-
       <main>
         {/* Hero Section with background image + gradient */}
         <section className="relative min-h-screen flex items-center justify-center text-white">
           {/* Background Image */}
           <div className="absolute inset-0">
             <img
-              src="/hero-bg.png" 
+              src="/hero-bg.png"
               alt="Hero Background"
               className="w-full h-full object-cover"
             />
@@ -48,9 +44,8 @@ const Home: React.FC = () => {
       </main>
 
       <ProductShowcase />
-      <AboutPage/>
+      <AboutPage />
 
-      <Footer />
     </div>
   );
 };
