@@ -2,12 +2,15 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import ProductShowcase from '@/components/PorductShowCase';
 import AboutPage from '@/components/About';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+
 
 const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
+
       <main>
         {/* Hero Section with background image + gradient */}
         <section className="relative min-h-screen flex items-center justify-center text-white">
@@ -34,18 +37,23 @@ const Home: React.FC = () => {
               <Button
                 size="lg"
                 variant="ghost"
-                className="text-lg px-8 py-3 bg-white text-[#0066DA] hover:bg-[#0066DA] hover:text-white transition-colors shadow-md"
+                className="text-lg px-8 py-3 bg-white hover:bg-[#0066DA] text-black hover:text-white transition-colors shadow-md"
               >
-                Shop Now
+
+                <Link
+                  href="/products"
+                  className="inline-flex items-center gap-2"
+                >
+                  <span>Shop now</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </Button>
             </div>
           </div>
         </section>
       </main>
 
-      <ProductShowcase />
       <AboutPage />
-
     </div>
   );
 };

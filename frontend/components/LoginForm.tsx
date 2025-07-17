@@ -25,7 +25,7 @@ const LoginForm: React.FC = () => {
 
     try {
       await login(email, password);
-      router.push('/products');
+      router.push('/');
     } catch (err) {
       setError((err as Error).message);
     } finally {

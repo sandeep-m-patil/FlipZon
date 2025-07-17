@@ -38,7 +38,7 @@ const SignupForm: React.FC = () => {
 
     try {
       await signup(name, email, password);
-      router.push('/products');
+      router.push('/');
     } catch (err) {
       setError((err as Error).message);
     } finally {

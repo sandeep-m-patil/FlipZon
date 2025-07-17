@@ -1,14 +1,13 @@
 'use client';
 
 import React from 'react';
-import { Button } from '@/components/ui/button';
-import Image from 'next/image';
+import ProductShowcase from './PorductShowCase';
 
 export default function AboutPage() {
   return (
     <section
       id="about"
-      className="relative bg-gradient-to-br from-black via-neutral-900 to-zinc-800 text-white py-24 md:py-40 px-4 overflow-hidden"
+      className="relative bg-black text-white py-24 md:py-40 px-4 overflow-hidden"
     >
       {/* Decorative Background Shapes (optional) */}
       <div className="absolute top-0 left-0 w-60 h-60 bg-[#0066DA] rounded-full opacity-20 blur-3xl animate-pulse -z-10" />
@@ -23,12 +22,9 @@ export default function AboutPage() {
           FlipZon is your modern online shopping destination — delivering quality, convenience, and confidence. We provide an extensive selection of top-tier electronics and everyday essentials at competitive prices, all supported by seamless delivery and trusted service.
         </p>
 
-        <Button
-          variant="default"
-          className="bg-[#0066DA] text-white hover:bg-[#2684FC] transition-all px-6 py-4 text-lg rounded-lg shadow-md"
-        >
-          Shop Now
-        </Button>
+       
+
+        <ProductShowcase/>
       </div>
 
     </section>
