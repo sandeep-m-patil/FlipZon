@@ -43,7 +43,6 @@ const Home: React.FC = () => {
         </section>
       </main>
 
-      <ProductShowcase />
       <AboutPage />
 
     </div>
