@@ -1,17 +1,21 @@
-'use client';
-
+"use client"
+import { cn } from "@/lib/utils"
 import React, { useState } from 'react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Mail, Lock, User, AlertCircle, CheckCircle } from 'lucide-react';
+import { Mail, Lock, User, AlertCircle } from 'lucide-react';
 
-const SignupForm: React.FC = () => {
-  const [name, setName] = useState('');
+export default function SignupForm({
+    className,
+    ...props
+
+}: React.ComponentProps<"form">) {
+
+const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -46,24 +50,22 @@ const SignupForm: React.FC = () => {
     }
   };
 
-  return (
-    <Card className="w-full max-w-md">
-      <CardHeader className="space-y-1 text-center">
-        <CardTitle className="text-2xl font-bold">Welcome to FlipZon </CardTitle>
-        <CardDescription>
-          Create a new account to start shopping
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {error && (
+
+    return (
+        <form className={cn("flex flex-col md:gap-4 gap-6", className)} {...props} onSubmit={handleSubmit}>
+              {error && (
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}
-
-        
+            <div className="flex flex-col items-center gap-2 text-center">
+                <h1 className="text-2xl font-bold">Create a new account</h1>
+                <p className="text-muted-foreground text-sm text-balance">
+                    Join us today and start your shopping journey!
+                </p>
+            </div>
+          
           
           <div className="space-y-2">
             <Label htmlFor="name">Full Name</Label>
@@ -130,13 +132,15 @@ const SignupForm: React.FC = () => {
             </div>
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full bg-[#0066DA] text-white hover:bg-[#2684FC]" disabled={loading}>
             {loading ? 'Creating Account...' : 'Sign Up'}
           </Button>
+            <div className="text-center text-sm">
+                Already have an account?{" "}
+                <a href="/login" className="underline underline-offset-4">
+                    Login here
+                </a>
+            </div>
         </form>
-      </CardContent>
-    </Card>
-  );
-};
-
-export default SignupForm;
+    )
+}
