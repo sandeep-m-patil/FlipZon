@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import ProductShowcase from '@/components/PorductShowCase';
 import AboutPage from '@/components/About';
 
 const Home: React.FC = () => {
