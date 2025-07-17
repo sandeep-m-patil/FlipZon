@@ -18,21 +18,21 @@ export interface Product {
   _id: string;
   title: string;
   description: string;
-  price: string;
+  price: number ;
   image: string;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface Order {
-  id: string;
-  userId: string;
-  items: any[];
-  total: number;
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-  createdAt: string;
-  updatedAt: string;
+export interface AddProductDialogProps {
+  onAdd: (product: {
+    title: string;
+    description: string;
+    price:  number; // if you're using string from input
+    image: string;
+  }) => void;
 }
+
 
 export interface AuthContextType {
   user: User | null;
