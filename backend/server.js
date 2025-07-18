@@ -11,10 +11,7 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors({
-  origin: 'http://localhost:3001',
-  credentials: true,
-}));
+
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -24,18 +21,13 @@ app.use('/api/cart', cartRoutes);
 // CORS Configuration
 app.use(cors({
     origin: [
-        'https://mern-flipzon.vercel.app',
-        'https://mern-flipzon.vercel.app/',
-        'http://localhost:5173',
-        'http://localhost:5174'
+        'https://flip-zon.vercel.app',
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Middleware
-app.use(express.json());
 
 
 // Basic route for testing
@@ -46,7 +38,7 @@ app.get('/', (req, res) => {
 const startServer = async () => {
     try {
         await connectDB();
-        
+
         const PORT = process.env.PORT || 5000;
         const server = app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
