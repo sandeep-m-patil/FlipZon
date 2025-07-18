@@ -27,17 +27,18 @@ export interface Product {
 }
 
 export interface CartItem {
-  _id: string;
+  _id: string; // ID of the cart item
+  product: string; // product ID (can also expand into Product object if populated)
   quantity: number;
-  product: {
-    _id:string;
-    description:string;
-    title: string;
-    price: number;
-    image:string;
-
-  };
 }
+
+export interface Cart {
+  _id: string;
+  user: string;
+  items: CartItem[];
+  __v: number;
+}
+
 export interface AddProductDialogProps {
   onAdd: (product: {
     title: string;

@@ -10,15 +10,20 @@ import { Separator } from '@/components/ui/separator'
 import { ShoppingCart } from 'lucide-react'
 import PriceDisplay from '@/utils/PriceDisplay'
 import { useCartStore } from '@/store/useCartStore'
+import { useAuth } from '@/context/AuthContext'
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+import { CheckCircle2 } from "lucide-react"
 
 const slugify = (text: string) =>
   text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '')
 
 export default function ProductDetailPage() {
+  const { user, isAuthenticated } = useAuth();
   const { slug } = useParams()
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1);
+  const [showAlert, setShowAlert] = useState(false);
 
   const { addToCart } = useCartStore()
 
@@ -68,6 +73,14 @@ export default function ProductDetailPage() {
         <div className="text-sm text-gray-500 mb-6">
           Home / Products / <span className="text-gray-800">{product.title}</span>
         </div>
+        {showAlert && (
+          <Alert variant="default" className="mb-4 bg-green-50 border-green-500 text-green-700">
+            <CheckCircle2 className="h-4 w-4" />
+            <AlertTitle>Success</AlertTitle>
+            <AlertDescription>Item added to cart!</AlertDescription>
+          </Alert>
+        )}
+
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 justify-center items-center">
           {/* Left - Product Image */}
@@ -95,48 +108,56 @@ export default function ProductDetailPage() {
 
             <Separator />
 
-            <div className="md:text-4xl text-2xl font-bold"><PriceDisplay amount={product.price} /></div>
+            <div className="md:text-4xl text-2xl font-bold"><PriceDisplay amount={product.price}  /></div>
+
+            {isAuthenticated &&
+              user?.role === "user" && (
+
+                <>{/*quantity controlls*/}
+                  <div className="flex items-center space-x-4 bg-slate-50 p-2 rounded-lg">
+                    <label className="text-sm font-medium text-gray-700">Quantity:</label>
+                    <div className="flex items-center border rounded-lg overflow-hidden">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setQuantity( quantity - 1)}
+                        className="bg-white text-black px-3 py-1 hover:bg-slate-100"
+                      >
+                        -
+                      </Button>
+                      <span className="px-4 py-1 min-w-[40px] text-center">{quantity}</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setQuantity(quantity + 1)}
+                        className="bg-white text-black px-3 py-1 hover:bg-slate-100"
+                      >
+                        +
+                      </Button>
+                    </div>
+                  </div>
 
 
-            {/*quantity controlls*/}
-            <div className="flex items-center space-x-4 bg-slate-50 p-2 rounded-lg">
-              <label className="text-sm font-medium text-gray-700">Quantity:</label>
-              <div className="flex items-center border rounded-lg overflow-hidden">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="bg-white text-black px-3 py-1 hover:bg-slate-100"
-                >
-                  -
-                </Button>
-                <span className="px-4 py-1 min-w-[40px] text-center">{quantity}</span>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="bg-white text-black px-3 py-1 hover:bg-slate-100"
-                >
-                  +
-                </Button>
-              </div>
-            </div>
 
-
-
-            {/* Action Buttons */}
-            <div className="flex gap-4 pt-2">
-              <Button   onClick={(e) => addToCart(product._id, quantity)} className="bg-[#0066DA] hover:bg-[#2684FC] text-white px-6 py-6 text-lg shadow-lg rounded-xl">
-                <ShoppingCart className="w-5 h-5 mr-2" />
-                Add to Cart
-              </Button>
-              <Button
-                variant="outline"
-                className="border-2 border-[#0066DA] text-[#0066DA] hover:bg-[#0066DA] hover:text-white px-6 py-6 text-lg rounded-xl"
-              >
-                Buy Now
-              </Button>
-            </div>
+                  {/* Action Buttons */}
+                  <div className="flex gap-4 pt-2">
+                    <Button onClick={() => {
+                      addToCart(product._id, quantity); setShowAlert(true)
+                      setTimeout(() => setShowAlert(false), 4000)
+                    }} className="bg-[#0066DA] hover:bg-[#2684FC] text-white px-6 py-6 text-lg shadow-lg rounded-xl">
+                      <ShoppingCart className="w-5 h-5 mr-2" />
+                      Add to Cart
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="border-2 border-[#0066DA] text-[#0066DA] hover:bg-[#0066DA] hover:text-white px-6 py-6 text-lg rounded-xl"
+                    >
+                      Buy Now
+                    </Button>
+                  </div>
+                </>
+              )
+            }
 
 
           </div>

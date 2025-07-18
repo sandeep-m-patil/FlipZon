@@ -5,6 +5,8 @@ interface PriceProps {
 }
 
 const PriceDisplay: React.FC<PriceProps> = ({ amount }) => {
+
+  if (typeof amount !== 'number') return <span>₹0</span>;
   const formatted = amount.toLocaleString('en-IN', {
     style: 'currency',
     currency: 'INR',

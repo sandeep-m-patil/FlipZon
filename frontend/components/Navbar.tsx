@@ -14,11 +14,12 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/context/AuthContext';
+import { useCartStore } from '@/store/useCartStore';
 
 const Navbar: React.FC = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const router = useRouter();
-
+  const {getCartLength} =useCartStore();
   const handleLogout = () => {
     logout();
     router.push('/login');
@@ -51,7 +52,7 @@ const Navbar: React.FC = () => {
                     variant="destructive"
                     className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs"
                   >
-                    3
+                    {getCartLength()}
                   </Badge>
                 </Button>
               </Link>

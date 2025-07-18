@@ -13,7 +13,7 @@ export default function CartPage() {
     cartItems,
     fetchCartItems,
     removeFromCart,
-    updateQuantity,
+    updateCartQuantity,
     getTotalPrice,
   } = useCartStore()
 
@@ -35,7 +35,7 @@ export default function CartPage() {
   ) => {
     e.preventDefault();
     setUpdatingId(productId);
-    updateQuantity(productId, quantity + 1);
+    updateCartQuantity(productId, quantity + 1);
     setUpdatingId(null);
   };
 
@@ -45,9 +45,9 @@ export default function CartPage() {
     quantity: number
   ) => {
     e.preventDefault();
-    if (quantity > 1) {
+    if (quantity > 0) {
       setUpdatingId(productId);
-      updateQuantity(productId, quantity - 1);
+      updateCartQuantity(productId, quantity - 1);
       setUpdatingId(null);
     }
   };
@@ -62,24 +62,24 @@ export default function CartPage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto py-20 px-4 ">
+    <div className="max-w-5xl mx-auto py-25 px-4 ">
       <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-6 flex items-center justify-center text-center">
         <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 md:w-10 md:h-10 mr-2" />
         Your Cart
       </h1>
       {cartItems.length === 0 ? (
-        <div className="text-center text-muted-foreground">Your cart is empty.</div>
+        <div className="text-center text-muted-foreground">Your cart is empty. </div>
       ) : (
         <>
-          <div className="grid gap-4 ">
+          <div className="grid gap-4  ">
             {cartItems.map((item) => (
               <Card key={item._id} className="flex flex-col sm:flex-row items-center justify-between p-4">
-                <div className="flex items-center gap-4 w-full sm:w-auto">
+                <div className="flex items-center justify-center gap-4 w-full sm:w-auto">
                   <Image
                     src={item.product.image}
                     alt={item.product.title}
-                    width={80}
-                    height={80}
+                    width={120}
+                    height={120}
                     className="rounded"
                   />
                   <div>
@@ -96,7 +96,7 @@ export default function CartPage() {
                   <div className="flex items-center border rounded-md px-2 py-1">
                     <Button
                       variant="ghost"
-                      onClick={(e) => handleDecrement(e, item._id, item.quantity)}
+                      onClick={(e) => handleDecrement(e, item.product._id, item.quantity)}
                       className="text-lg px-2"
                       disabled={updatingId === item._id}
                     >
@@ -105,7 +105,7 @@ export default function CartPage() {
                     <span className="mx-2 font-medium">{item.quantity}</span>
                     <Button
                       variant="ghost"
-                      onClick={(e) => handleIncrement(e, item._id, item.quantity)}
+                      onClick={(e) => handleIncrement(e, item.product._id, item.quantity)}
                       className="text-lg px-2"
                       disabled={updatingId === item._id}
                     >
@@ -115,10 +115,10 @@ export default function CartPage() {
 
                   <Button
                     variant="destructive"
-                    onClick={() => removeFromCart(item._id)}
-                    disabled={updatingId === item._id}
+                    onClick={() => removeFromCart(item.product._id)}
+                    disabled={updatingId === item.product._id}
                   >
-                    <Trash2 className="h-4 w-4 mr-2" />
+                    <Trash2 className="h-4 w-4 mr-2 " />
                     Remove
                   </Button>
                 </div>
