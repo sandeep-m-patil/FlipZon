@@ -1,10 +1,12 @@
 export interface User {
-  _id:string,
   id: string;
   name: string;
   email: string;
   role: 'admin' | 'user';
 }
+
+
+
 
 export interface AuthContextType {
   user: User | null;
