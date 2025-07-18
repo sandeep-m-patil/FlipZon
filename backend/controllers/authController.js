@@ -51,3 +51,13 @@ export const loginUser = async (req, res) => {
   }
 };
 
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().select('-password'); // exclude password
+    res.json(users);
+  } catch (err) {
+    console.error("Get Users Error:", err.message);
+    res.status(500).json({ message: err.message });
+  }
+};

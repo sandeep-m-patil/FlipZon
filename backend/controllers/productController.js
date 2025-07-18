@@ -3,11 +3,17 @@ import Product from '../models/Product.js';
 // Create Product (Admin Only)
 export const createProduct = async (req, res) => {
   try {
-    const product = await Product.create(req.body);
+    const { name, description, price, image } = req.body;
+
+    if (!name || !description || !price || !image) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const product = await Product.create({ name, description, price, image });
     res.status(201).json(product);
   } catch (err) {
     console.error("Create Product Error:", err.message);
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -27,7 +33,7 @@ export const updateProduct = async (req, res) => {
     res.json(updated);
   } catch (err) {
     console.error("Update Product Error:", err.message);
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -43,7 +49,7 @@ export const deleteProduct = async (req, res) => {
     res.json({ message: 'Product deleted successfully' });
   } catch (err) {
     console.error("Delete Product Error:", err.message);
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -54,6 +60,6 @@ export const getAllProducts = async (req, res) => {
     res.json(products);
   } catch (err) {
     console.error("Get Products Error:", err.message);
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
