@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Truck, Shield, RotateCcw, Star, ShoppingCart } from 'lucide-react'
+import PriceDisplay from '@/utils/PriceDisplay'
 
 const slugify = (text: string) =>
   text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '')
@@ -69,12 +70,12 @@ export default function ProductDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 justify-center items-center">
           {/* Left - Product Image */}
           <div className="space-y-6">
-            <div className="relative w-full h-[400px] rounded-xl overflow-hidden">
+            <div className="relative w-full md:h-[400px] h-[300px] rounded-xl overflow-hidden">
               <Image
                 src={productImages[selectedImage]}
                 alt={product.title}
                 fill
-                className="object-contain p-6 hover:scale-105 transition-transfor"
+                className="object-contain p-6 transition-transfor"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
               />
@@ -84,15 +85,15 @@ export default function ProductDetailPage() {
           {/* Right - Product Info */}
           <div className="space-y-6 pt-5">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 leading-snug">{product.title}</h1>
-       
+              <h1 className="md:text-4xl text-2xl font-bold text-gray-900 leading-snug">{product.title}</h1>
+
             </div>
 
-            <p className="text-gray-700 text-lg">{product.description}</p>
+            <p className="text-gray-700 text-md">{product.description}</p>
 
             <Separator />
 
-            <div className="text-4xl font-bold text-[#0066DA]">₹{product.price}</div>
+            <div className="md:text-4xl text-2xl font-bold"><PriceDisplay amount={product.price} /></div>
 
             {/* Action Buttons */}
             <div className="flex gap-4 pt-2">
