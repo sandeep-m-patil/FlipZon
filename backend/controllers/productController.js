@@ -3,13 +3,13 @@ import Product from '../models/Product.js';
 // Create Product (Admin Only)
 export const createProduct = async (req, res) => {
   try {
-    const { name, description, price, image } = req.body;
+    const { title, description, price, image } = req.body;
 
-    if (!name || !description || !price || !image) {
+    if (!title || !description || !price || !image) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const product = await Product.create({ name, description, price, image });
+    const product = await Product.create({ title, description, price, image });
     res.status(201).json(product);
   } catch (err) {
     console.error("Create Product Error:", err.message);

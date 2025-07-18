@@ -41,7 +41,7 @@ const ProductPage = () => {
         ) : (
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => {
-              const slug = slugify(product.title);
+               const slug = slugify(product.title);
               return (
                 <ProductCard key={product._id} product={product} slug={slug} />
               );
