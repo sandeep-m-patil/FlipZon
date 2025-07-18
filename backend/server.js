@@ -12,12 +12,6 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-
-// Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/cart', cartRoutes);
-
 // CORS Configuration
 app.use(cors({
     origin: [
@@ -26,8 +20,12 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization']
-}));
+}));    
 
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes);
 
 
 // Basic route for testing
