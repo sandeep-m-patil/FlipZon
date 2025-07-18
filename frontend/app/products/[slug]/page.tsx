@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { ShoppingCart } from 'lucide-react'
 import PriceDisplay from '@/utils/PriceDisplay'
-import { useCartStore } from '@/store/useCart'
+import { useCartStore } from '@/store/useCartStore'
 
 const slugify = (text: string) =>
   text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '')
@@ -20,7 +20,7 @@ export default function ProductDetailPage() {
   const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1);
 
-  const addToCart = useCartStore(state => state.addToCart);
+  const { addToCart } = useCartStore()
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -126,7 +126,7 @@ export default function ProductDetailPage() {
 
             {/* Action Buttons */}
             <div className="flex gap-4 pt-2">
-              <Button  onClick={() => addToCart(product, quantity)} className="bg-[#0066DA] hover:bg-[#2684FC] text-white px-6 py-6 text-lg shadow-lg rounded-xl">
+              <Button   onClick={(e) => addToCart(product._id, quantity)} className="bg-[#0066DA] hover:bg-[#2684FC] text-white px-6 py-6 text-lg shadow-lg rounded-xl">
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 Add to Cart
               </Button>

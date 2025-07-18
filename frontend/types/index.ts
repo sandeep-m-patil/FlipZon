@@ -1,4 +1,5 @@
 export interface User {
+  _id:string,
   id: string;
   name: string;
   email: string;
@@ -16,14 +17,27 @@ export interface AuthContextType {
 
 export interface Product {
   _id: string;
-  title: string;
+  title: string; 
   description: string;
-  price: number ;
+  price: number;
   image: string;
   createdAt: string;
   updatedAt: string;
+  __v: number;
 }
 
+export interface CartItem {
+  _id: string;
+  quantity: number;
+  product: {
+    _id:string;
+    description:string;
+    title: string;
+    price: number;
+    image:string;
+
+  };
+}
 export interface AddProductDialogProps {
   onAdd: (product: {
     title: string;
