@@ -54,16 +54,25 @@ export const removeFromCart = async (req, res) => {
   }
 };
 
+
 // Get Cart
 export const getCart = async (req, res) => {
+  const userId = req.user._id;
+
   try {
-    const cart = await Cart.findOne({ user: req.user._id }).populate('items.product');
-    res.status(200).json(cart || { items: [] });
+    const cart = await Cart.findOne({ user: userId }).populate("items.product");
+
+    if (!cart) {
+      return res.status(200).json({ items: [] });  // return empty array if no cart
+    }
+
+    res.status(200).json({ items: cart.items });
   } catch (err) {
     console.error("Get Cart Error:", err.message);
     res.status(500).json({ message: err.message });
   }
 };
+
 
 
 // Update cart
