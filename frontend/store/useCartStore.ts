@@ -35,7 +35,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
   fetchCartItems: async () => {
     try {
       const token = localStorage.getItem("authToken")
-      const res = await axios.get("http://localhost:5000/api/cart", {
+      const res = await axios.get("https://flip-zon-backend.vercel.app/api/cart", {
         headers: { Authorization: `Bearer ${token}` },
       })
       set({ cartItems: res.data.items })
@@ -54,7 +54,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
       }
 
       await axios.post(
-        "http://localhost:5000/api/cart/add", // Full URL if not using proxy
+        "https://flip-zon-backend.vercel.app/api/cart/add", // Full URL if not using proxy
         { productId, quantity },
         {
           headers: {
@@ -64,7 +64,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
         }
       );
 
-      const res = await axios.get("http://localhost:5000/api/cart", {
+      const res = await axios.get("https://flip-zon-backend.vercel.app/api/cart", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -80,7 +80,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
   removeFromCart: async (productId) => {
     try {
       const token = localStorage.getItem("authToken")
-      const res = await axios.post('http://localhost:5000/api/cart/remove', { productId },
+      const res = await axios.post('https://flip-zon-backend.vercel.app/api/cart/remove', { productId },
         {
           headers: { Authorization: `Bearer ${token}` },
 
@@ -105,7 +105,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
       }
 
       const res = await axios.put(
-        "http://localhost:5000/api/cart/update",
+        "https://flip-zon-backend.vercel.app/api/cart/update",
         { productId, quantity },
         {
           headers: {
