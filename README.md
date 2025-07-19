@@ -5,7 +5,7 @@ A full-featured e-commerce website built with the MERN stack (MongoDB, Express.j
 
 ## 📦 Tech Stack
 
-- **Frontend**: Next.js, Vite, Tailwind CSS/ ShadCN/UI
+- **Frontend**: Next.js, Tailwind CSS/ ShadCN/UI
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (via Mongoose)
 - **Authentication**: JWT (JSON Web Tokens)
@@ -22,10 +22,12 @@ A full-featured e-commerce website built with the MERN stack (MongoDB, Express.j
 - View all products
 - Product details page with images, description, etc.
 - Add to cart, remove from cart
+- User profile page
 
 ### 🛠️ Admin Features
 
 - Admin login
+- Admin profile page
 - Add, update, and delete products
 
 
@@ -43,7 +45,7 @@ A full-featured e-commerce website built with the MERN stack (MongoDB, Express.j
 ## 🧠 Future Improvements
 - Payment gateway integration (e.g., Razorpay/Stripe)
 - Wishlist
-- Product reviews
+- Product reviews , ratings etc.
 - Admin analytics dashboard
 - Image upload with Cloudinary or similar
 
