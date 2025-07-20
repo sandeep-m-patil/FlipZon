@@ -48,7 +48,7 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center py-20">
+      <div className="flex justify-center items-center py-20">
         <Loader2 className="w-10 h-10 animate-spin text-primary" />
       </div>
     )
@@ -98,7 +98,7 @@ export default function ProductDetailPage() {
                 src={product.image}
                 alt={product.title}
                 fill
-                className="object-contain p-6 transition-transfor"
+                className="object-contain p-6 transition-transform"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
               />
@@ -119,7 +119,7 @@ export default function ProductDetailPage() {
             <div className="md:text-4xl text-2xl font-bold"><PriceDisplay amount={product.price} /></div>
 
 
-            <>{/*quantity controlls*/}
+          {/*quantity controlls*/}
               <div className="flex items-center space-x-4 bg-slate-50 p-2 rounded-lg">
                 <label className="text-sm font-medium text-gray-700">Quantity:</label>
                 <div className="flex items-center border rounded-lg overflow-hidden">
@@ -145,23 +145,30 @@ export default function ProductDetailPage() {
 
 
 
-              {/* Action Button */}
-              <div className="flex gap-4 pt-2">
-                <Button onClick={() => {
-                  if (!isAuthenticated) {
-                    setShowLoginAlert(true);
-                    setTimeout(() => setShowLoginAlert(false), 4000);
-                  } else {
-                    addToCart(product._id, quantity);
-                    setShowAlert(true);
-                    setTimeout(() => setShowAlert(false), 4000);
-                  }
-                }} className="bg-[#0066DA] hover:bg-[#2684FC] text-white px-6 py-6 text-lg shadow-lg rounded-xl">
-                  <ShoppingCart className="w-5 h-5 mr-2" />
-                  Add to Cart
+              <div className="flex justify-center sm:justify-start items-center pt-4">
+                <Button
+                  onClick={() => {
+                    if (!isAuthenticated) {
+                      setShowLoginAlert(true);
+                      setTimeout(() => setShowLoginAlert(false), 4000);
+                    } else {
+                      addToCart(product._id, quantity);
+                      setShowAlert(true);
+                      setTimeout(() => setShowAlert(false), 4000);
+                    }
+                  }}
+                  className="flex items-center gap-3 bg-[#0066DA] hover:bg-[#2684FC] text-white 
+               px-5 py-4 sm:px-6 sm:py-5 lg:px-8 lg:py-5 
+               text-base sm:text-lg lg:text-xl 
+               font-semibold shadow-xl rounded-xl 
+               transition duration-300 w-full sm:w-auto text-center"
+                >
+                  <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <span>Add to Cart</span>
                 </Button>
               </div>
-            </>
+
+        
 
 
 
