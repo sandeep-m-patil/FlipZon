@@ -7,7 +7,7 @@ import axios from '@/lib/axios'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { ShoppingCart } from 'lucide-react'
+import { AlertCircle, Loader2, ShoppingCart } from 'lucide-react'
 import PriceDisplay from '@/utils/PriceDisplay'
 import { useCartStore } from '@/store/useCartStore'
 import { useAuth } from '@/context/AuthContext'
@@ -24,7 +24,7 @@ export default function ProductDetailPage() {
   const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1);
   const [showAlert, setShowAlert] = useState(false);
-
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
   const { addToCart } = useCartStore()
 
   useEffect(() => {
@@ -48,8 +48,8 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0066DA]"></div>
+      <div className="flex justify-center py-20">
+        <Loader2 className="w-10 h-10 animate-spin text-primary" />
       </div>
     )
   }
@@ -73,6 +73,14 @@ export default function ProductDetailPage() {
         <div className="text-sm text-gray-500 mb-6">
           Home / Products / <span className="text-gray-800">{product.title}</span>
         </div>
+
+        {showLoginAlert && (
+          <Alert variant="default" className="mb-4 bg-red-50 border-red-500 text-red-800">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Login Required</AlertTitle>
+            <AlertDescription>Please login to add items to your cart.</AlertDescription>
+          </Alert>
+        )}
         {showAlert && (
           <Alert variant="default" className="mb-4 bg-green-50 border-green-500 text-green-700">
             <CheckCircle2 className="h-4 w-4" />
@@ -108,7 +116,7 @@ export default function ProductDetailPage() {
 
             <Separator />
 
-            <div className="md:text-4xl text-2xl font-bold"><PriceDisplay amount={product.price}  /></div>
+            <div className="md:text-4xl text-2xl font-bold"><PriceDisplay amount={product.price} /></div>
 
             {isAuthenticated &&
               user?.role === "user" && (
@@ -120,7 +128,7 @@ export default function ProductDetailPage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => setQuantity( quantity - 1)}
+                        onClick={() => setQuantity(quantity - 1)}
                         className="bg-white text-black px-3 py-1 hover:bg-slate-100"
                       >
                         -
@@ -140,21 +148,25 @@ export default function ProductDetailPage() {
 
 
                   {/* Action Buttons */}
-                  <div className="flex gap-4 pt-2">
-                    <Button onClick={() => {
-                      addToCart(product._id, quantity); setShowAlert(true)
-                      setTimeout(() => setShowAlert(false), 4000)
-                    }} className="bg-[#0066DA] hover:bg-[#2684FC] text-white px-6 py-6 text-lg shadow-lg rounded-xl">
-                      <ShoppingCart className="w-5 h-5 mr-2" />
-                      Add to Cart
-                    </Button>
+                  <div className="flex items-center justify-start gap-3 pt-3 sm:pt-4">
                     <Button
-                      variant="outline"
-                      className="border-2 border-[#0066DA] text-[#0066DA] hover:bg-[#0066DA] hover:text-white px-6 py-6 text-lg rounded-xl"
+                      onClick={() => {
+                        if (!isAuthenticated) {
+                          setShowLoginAlert(true);
+                          setTimeout(() => setShowLoginAlert(false), 4000);
+                        } else {
+                          addToCart(product._id, quantity);
+                          setShowAlert(true);
+                          setTimeout(() => setShowAlert(false), 4000);
+                        }
+                      }}
+                      className="flex items-center gap-2 bg-[#0066DA] hover:bg-[#2684FC] text-white px-4 py-3 text-sm sm:px-6 sm:py-4 sm:text-base md:text-lg shadow-md rounded-lg sm:rounded-xl transition duration-300 w-full sm:w-auto"
                     >
-                      Buy Now
+                      <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span>Add to Cart</span>
                     </Button>
                   </div>
+
                 </>
               )
             }
