@@ -118,58 +118,51 @@ export default function ProductDetailPage() {
 
             <div className="md:text-4xl text-2xl font-bold"><PriceDisplay amount={product.price} /></div>
 
-            {isAuthenticated &&
-              user?.role === "user" && (
 
-                <>{/*quantity controlls*/}
-                  <div className="flex items-center space-x-4 bg-slate-50 p-2 rounded-lg">
-                    <label className="text-sm font-medium text-gray-700">Quantity:</label>
-                    <div className="flex items-center border rounded-lg overflow-hidden">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setQuantity(quantity - 1)}
-                        className="bg-white text-black px-3 py-1 hover:bg-slate-100"
-                      >
-                        -
-                      </Button>
-                      <span className="px-4 py-1 min-w-[40px] text-center">{quantity}</span>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setQuantity(quantity + 1)}
-                        className="bg-white text-black px-3 py-1 hover:bg-slate-100"
-                      >
-                        +
-                      </Button>
-                    </div>
-                  </div>
+            <>{/*quantity controlls*/}
+              <div className="flex items-center space-x-4 bg-slate-50 p-2 rounded-lg">
+                <label className="text-sm font-medium text-gray-700">Quantity:</label>
+                <div className="flex items-center border rounded-lg overflow-hidden">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setQuantity(quantity - 1)}
+                    className="bg-white text-black px-3 py-1 hover:bg-slate-100"
+                  >
+                    -
+                  </Button>
+                  <span className="px-4 py-1 min-w-[40px] text-center">{quantity}</span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="bg-white text-black px-3 py-1 hover:bg-slate-100"
+                  >
+                    +
+                  </Button>
+                </div>
+              </div>
 
 
 
-                  {/* Action Buttons */}
-                  <div className="flex items-center justify-start gap-3 pt-3 sm:pt-4">
-                    <Button
-                      onClick={() => {
-                        if (!isAuthenticated) {
-                          setShowLoginAlert(true);
-                          setTimeout(() => setShowLoginAlert(false), 4000);
-                        } else {
-                          addToCart(product._id, quantity);
-                          setShowAlert(true);
-                          setTimeout(() => setShowAlert(false), 4000);
-                        }
-                      }}
-                      className="flex items-center gap-2 bg-[#0066DA] hover:bg-[#2684FC] text-white px-4 py-3 text-sm sm:px-6 sm:py-4 sm:text-base md:text-lg shadow-md rounded-lg sm:rounded-xl transition duration-300 w-full sm:w-auto"
-                    >
-                      <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
-                      <span>Add to Cart</span>
-                    </Button>
-                  </div>
+              {/* Action Button */}
+              <div className="flex gap-4 pt-2">
+                <Button onClick={() => {
+                  if (!isAuthenticated) {
+                    setShowLoginAlert(true);
+                    setTimeout(() => setShowLoginAlert(false), 4000);
+                  } else {
+                    addToCart(product._id, quantity);
+                    setShowAlert(true);
+                    setTimeout(() => setShowAlert(false), 4000);
+                  }
+                }} className="bg-[#0066DA] hover:bg-[#2684FC] text-white px-6 py-6 text-lg shadow-lg rounded-xl">
+                  <ShoppingCart className="w-5 h-5 mr-2" />
+                  Add to Cart
+                </Button>
+              </div>
+            </>
 
-                </>
-              )
-            }
 
 
           </div>
