@@ -2,8 +2,11 @@
 
 import PriceDisplay from "@/utils/PriceDisplay";
 import React from "react";
+import { useCartStore } from "@/store/useCartStore";
 
 const RazorpayButton = ({ amount = 500 }) => {
+ const { cartItems, clearCart } = useCartStore(); // Make sure you have a clearCart method
+
   const loadRazorpay = () => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -19,6 +22,7 @@ const RazorpayButton = ({ amount = 500 }) => {
         handler: function (response: { razorpay_payment_id: string }) {
           alert("Payment Successful");
           alert("Payment ID: " + response.razorpay_payment_id);
+          clearCart(); // Clear the cart after successful payment
         },
         prefill: {
           name: "Sandeep Patil",

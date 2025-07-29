@@ -7,7 +7,6 @@ import { Card } from "@/components/ui/card"
 import { ShoppingCart, Trash2 } from "lucide-react"
 import Image from "next/image"
 import PriceDisplay from "@/utils/PriceDisplay"
-import { useRouter } from "next/navigation"
 import RazorpayButton from "@/components/RazorpayButton"
 
 declare global {
@@ -25,7 +24,6 @@ export default function CartPage() {
     getTotalPrice,
   } = useCartStore()
 
-  const router = useRouter();
 
   const [loading, setLoading] = useState<boolean>(true)
   const [updatingId, setUpdatingId] = useState<string | null>(null)

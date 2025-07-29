@@ -23,8 +23,9 @@ interface CartStore {
   addToCart: (productId: string, quantity: number) => Promise<void>
   removeFromCart: (productId: string) => Promise<void>
   updateCartQuantity: (productId: string, quantity: number) => Promise<void>
-  getCartLength:()=>number
+  getCartLength: () => number
   getTotalPrice: () => number
+  clearCart: () => void
 }
 
 export const useCartStore = create<CartStore>((set, get) => ({
@@ -135,13 +136,25 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
 
 
-  getCartLength: () => { 
-    const {cartItems}=get()
+  getCartLength: () => {
+    const { cartItems } = get()
     return cartItems.length;
-   },
+  },
 
   getTotalPrice: () => {
     const { cartItems } = get()
     return cartItems.reduce((total, item) => total + Number(item.product.price) * Number(item.quantity), 0)
+  },
+
+  clearCart: async () => {
+    try {
+      const token = localStorage.getItem("authToken")
+      const res = await axios.delete('https://flip-zon-backend.vercel.app/api/cart/clear', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      set({ cartItems: [] })
+    } catch (error) {
+      console.error("Failed to clear cart", error)
+    }
   }
 }))
