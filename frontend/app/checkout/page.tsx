@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function CheckoutPage() {
+function CheckoutContent() {
     const searchParams = useSearchParams();
     const amount = searchParams.get("amount") || "0";
 
@@ -19,8 +19,8 @@ export default function CheckoutPage() {
     const handlePayment = () => {
         // @ts-ignore
         const options = {
-            key: "rzp_test_baqU988B0393JS", // Replace with your Razorpay key
-            amount: Number(amount) * 100, // Amount in paise
+            key: "rzp_test_baqU988B0393JS",
+            amount: Number(amount) * 100,
             currency: "INR",
             name: "FlipZon",
             description: "Order Payment",
@@ -47,5 +47,13 @@ export default function CheckoutPage() {
             <p>Amount to pay: ₹{amount}</p>
             <button onClick={handlePayment}>Pay with Razorpay</button>
         </div>
+    );
+}
+
+export default function CheckoutPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <CheckoutContent />
+        </Suspense>
     );
 }
