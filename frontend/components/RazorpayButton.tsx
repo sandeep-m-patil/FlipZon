@@ -16,7 +16,7 @@ const RazorpayButton = ({ amount = 500 }) => {
         name: "Flipzon",
         description: "Test Order Payment",
         image: "/logo.png",
-        handler: function (response) {
+        handler: function (response: { razorpay_payment_id: string }) {
           alert("Payment Successful");
           alert("Payment ID: " + response.razorpay_payment_id);
         },
