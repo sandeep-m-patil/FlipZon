@@ -8,6 +8,7 @@ import { ShoppingCart, Trash2 } from "lucide-react"
 import Image from "next/image"
 import PriceDisplay from "@/utils/PriceDisplay"
 import { useRouter } from "next/navigation"
+import RazorpayButton from "@/components/RazorpayButton"
 
 declare global {
   interface Window {
@@ -61,41 +62,6 @@ export default function CartPage() {
     }
   };
 
-  const handlePayment = () => {
-    const amount = getTotalPrice();
-
-    const options = {
-      key: "rzp_test_YourTestKeyHere", // Replace with your Razorpay Test Key
-      amount: amount * 100, // Convert to paise
-      currency: "INR",
-      name: "FlipZon",
-      description: "Test Transaction",
-      image: "/logo.png", // optional: your brand logo
-      handler: function (response: any) {
-        alert("Payment Successful!")
-        console.log(response);
-      },
-      prefill: {
-        name: "Sandeep Patil",
-        email: "testuser@example.com",
-        contact: "9000090000",
-      },
-      notes: {
-        address: "Test Corporate Office",
-      },
-      theme: {
-        color: "#6366f1", // tailwind indigo-500
-      },
-    };
-
-    const rzp = new window.Razorpay(options);
-    rzp.open();
-  }
-
-  const handleCheckout = () => {
-    // You can pass data via query or use a global state/store
-    router.push(`/checkout?amount=${getTotalPrice()}`);
-  };
 
   if (loading) {
     return (
@@ -169,15 +135,19 @@ export default function CartPage() {
             ))}
           </div>
 
-          <div className="mt-6 p-4 bg-white text-right space-y-4">
-            <h2 className="text-xl font-semibold">Total: <PriceDisplay amount={getTotalPrice()} /></h2>
-            <Button className="w-full sm:w-auto" onClick={handlePayment}>
-              Order Now
-            </Button>
-            <Button className="w-full sm:w-auto" onClick={handleCheckout}>
-              Proceed to Checkout
-            </Button>
+          <div className="w-full mt-6 p-4">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center items-end gap-4">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-800 text-right w-full sm:w-auto">
+                Total: <span className="text-xl"><PriceDisplay amount={getTotalPrice()} /></span>
+              </h2>
+              <div className="w-full sm:w-auto text-right">
+                <RazorpayButton amount={getTotalPrice()} />
+              </div>
+            </div>
           </div>
+
+
+
         </>
       )}
     </div>
