@@ -23,6 +23,7 @@ A full-featured e-commerce website built with the MERN stack (MongoDB, Express.j
 - Product details page with images, description, etc.
 - Add to cart, remove from cart
 - User profile page
+- Test Payment
 
 ### 🛠️ Admin Features
 
@@ -43,7 +44,7 @@ A full-featured e-commerce website built with the MERN stack (MongoDB, Express.j
 
 
 ## 🧠 Future Improvements
-- Payment gateway integration (e.g., Razorpay/Stripe)
+- Payment gateway integration (e.g., Razorpay/Stripe) - Test Payment available
 - Wishlist
 - Product reviews , ratings etc.
 - Admin analytics dashboard
