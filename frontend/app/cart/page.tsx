@@ -7,6 +7,13 @@ import { Card } from "@/components/ui/card"
 import { ShoppingCart, Trash2 } from "lucide-react"
 import Image from "next/image"
 import PriceDisplay from "@/utils/PriceDisplay"
+import { useRouter } from "next/navigation"
+
+declare global {
+  interface Window {
+    Razorpay: any
+  }
+}
 
 export default function CartPage() {
   const {
@@ -16,6 +23,8 @@ export default function CartPage() {
     updateCartQuantity,
     getTotalPrice,
   } = useCartStore()
+
+  const router = useRouter();
 
   const [loading, setLoading] = useState<boolean>(true)
   const [updatingId, setUpdatingId] = useState<string | null>(null)
@@ -52,6 +61,41 @@ export default function CartPage() {
     }
   };
 
+  const handlePayment = () => {
+    const amount = getTotalPrice();
+
+    const options = {
+      key: "rzp_test_YourTestKeyHere", // Replace with your Razorpay Test Key
+      amount: amount * 100, // Convert to paise
+      currency: "INR",
+      name: "FlipZon",
+      description: "Test Transaction",
+      image: "/logo.png", // optional: your brand logo
+      handler: function (response: any) {
+        alert("Payment Successful!")
+        console.log(response);
+      },
+      prefill: {
+        name: "Sandeep Patil",
+        email: "testuser@example.com",
+        contact: "9000090000",
+      },
+      notes: {
+        address: "Test Corporate Office",
+      },
+      theme: {
+        color: "#6366f1", // tailwind indigo-500
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  }
+
+  const handleCheckout = () => {
+    // You can pass data via query or use a global state/store
+    router.push(`/checkout?amount=${getTotalPrice()}`);
+  };
 
   if (loading) {
     return (
@@ -87,7 +131,6 @@ export default function CartPage() {
                     <p className="text-sm text-muted-foreground">{item.product.description}</p>
                     <p className="text-base font-medium mt-1">
                       <PriceDisplay amount={item.product.price} />
-
                     </p>
                   </div>
                 </div>
@@ -126,10 +169,15 @@ export default function CartPage() {
             ))}
           </div>
 
-          <div className="mt-6 p-4  text-right bg-white">
-            <h2 className="text-xl font-semibold mb-4">Total: <PriceDisplay amount={getTotalPrice()} /> </h2>
+          <div className="mt-6 p-4 bg-white text-right space-y-4">
+            <h2 className="text-xl font-semibold">Total: <PriceDisplay amount={getTotalPrice()} /></h2>
+            <Button className="w-full sm:w-auto" onClick={handlePayment}>
+              Order Now
+            </Button>
+            <Button className="w-full sm:w-auto" onClick={handleCheckout}>
+              Proceed to Checkout
+            </Button>
           </div>
-
         </>
       )}
     </div>

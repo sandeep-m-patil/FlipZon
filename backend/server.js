@@ -16,6 +16,7 @@ app.use(express.json());
 app.use(cors({
     origin: [
         'https://flip-zon.vercel.app',
+        'http://localhost:3001'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
