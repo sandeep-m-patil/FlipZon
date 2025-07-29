@@ -4,7 +4,8 @@ import {
     addToCart,
     removeFromCart,
     getCart,
-    updateCart
+    updateCart,
+    clearCart
 
 } from '../controllers/cartController.js';
 import {protect} from '../middleware/authMiddleware.js'
@@ -15,5 +16,6 @@ router.post('/add',protect,addToCart);
 router.post('/remove',protect,removeFromCart);
 router.get('/',protect,getCart);
 router.put('/update',protect,updateCart);
+router.delete('/clear',protect,clearCart);
 
 export default router;
